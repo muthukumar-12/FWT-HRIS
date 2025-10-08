@@ -25,7 +25,7 @@ const CandidateCard = ({ candidate }) => {
           <p className="text-sm text-gray-500">Phone no: {candidate.phone}</p>
         </div>
 
-        <div>
+        <div className="flex gap-x-2">
           <Button type="button" variant="primary2" onClick={handleViewResume}>
             View 
           </Button>
