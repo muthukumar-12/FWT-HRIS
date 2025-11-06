@@ -2,11 +2,7 @@ import React from "react";
 import StatCard from "../components/ui/StatCard";
 import dashboardStats from "../data/dashboard_stats";
 
-/**
- * Dashboard
- * - Uses sample data from `src/data/dashboard_stats.jsx` to populate 3 stat cards:
- *   Candidates, Applications, Total Jobs
- */
+
 const Dashboard = ({ stats = dashboardStats }) => {
   const metrics = [
     { key: "candidates", title: "Candidates" },
@@ -26,7 +22,7 @@ const Dashboard = ({ stats = dashboardStats }) => {
           const growth = data.growth ?? "—";
           const trend = data.trend ?? "up";
 
-          // choose an icon per metric
+          
           let icon = null;
           if (m.key === "candidates") {
             icon = (

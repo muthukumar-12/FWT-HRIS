@@ -91,12 +91,12 @@ const JobPosting = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-gray-800">Job Postings</h2>
+        <h2 className="text-3xl  text-gray-800">Posted Job</h2>
         <button onClick={openForm} className="inline-flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
           </svg>
-          Add Job Post
+          Post New Job
         </button>
       </div>
 
@@ -126,8 +126,8 @@ const JobPosting = () => {
 
       {/* Modal / Drawer for Add Job */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+        <div className="fixed inset-0 z-40 flex items-start sm:items-center justify-center py-6 sm:py-0 overflow-auto bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-full sm:max-w-lg md:max-w-2xl p-4 sm:p-6 max-h-[90vh] overflow-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Post a New Job</h3>
               <button onClick={closeForm} className="text-gray-500 hover:text-gray-700">Close</button>

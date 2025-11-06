@@ -58,8 +58,8 @@ const Sidebar = () => {
             to={item.path}
             onClick={() => setActive(item.path)}
             className={`flex items-center ${isOpen ? 'gap-3 px-4' : 'justify-center px-0'} py-3 rounded-sm transition-colors duration-200 ${active === item.path
-                ? "bg-blue-300 text-white font-semibold"
-                : "hover:bg-blue-300 hover:text-white"
+                ? "bg-blue-400 text-white font-semibold"
+                : "hover:bg-blue-400 hover:text-white"
               }`}
           >
             <div className="flex-shrink-0 text-slate-700">{item.icon}</div>

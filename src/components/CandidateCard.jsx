@@ -17,21 +17,96 @@ const CandidateCard = ({ candidate }) => {
   return (
     <>
        
-      <div className="border rounded-lg shadow-sm p-4 mb-4 flex justify-between items-center hover:shadow-md transition">
-        <div>
-          <h3 className="text-lg font-semibold text-orange-400">{candidate.name}</h3>
-          <p className="text-sm text-gray-500">{candidate.email}</p>
-          <p className="text-sm text-gray-500">Applied for: {candidate.role}</p>
-          <p className="text-sm text-gray-500">Phone no: {candidate.phone}</p>
+      <div className="border rounded-lg shadow-sm p-4 mb-4 flex items-start hover:shadow-md transition relative">
+        {/* Left: avatar/profile */}
+        <div className="flex-shrink-0 mr-4">
+          {candidate.avatarUrl ? (
+            <img src={candidate.avatarUrl} alt={candidate.name} className="w-14 h-14 rounded-full object-cover" />
+          ) : (
+            <div className="w-14 h-14 rounded-full bg-gray-200 text-black flex items-center justify-center text-lg font-semibold">
+              {candidate.name ? candidate.name.split(" ").map((n) => n[0]).slice(0, 2).join("") : "NA"}
+            </div>
+          )}
         </div>
 
-        <div className="flex gap-x-2">
-          <Button type="button" variant="primary2" onClick={handleViewResume}>
-            View 
-          </Button>
-          <Button type="button" variant="primary2" onClick={handleSchedule}>
-            Schedule
-          </Button>
+        {/* Middle: candidate info */}
+        <div className="flex-1">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800">{candidate.name}</h3>
+
+            <div className="mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-4">
+              {/* Email with icon */}
+              <div className="flex items-center text-sm text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12H8m8 0l-4 4m4-4l-4-4" />
+                </svg>
+                <span className="truncate">{candidate.email}</span>
+              </div>
+
+              {/* Phone with +91 icon */}
+              <div className="flex items-center text-sm text-gray-600 mt-1 sm:mt-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h2l2 5-1 2a11 11 0 005 5l2-1 5 2v2a2 2 0 01-2 2A19 19 0 013 5z" />
+                </svg>
+                <span className="truncate">{(String(candidate.phone || "").startsWith('+') ? '' : '+91 ')}{candidate.phone}</span>
+              </div>
+            </div>
+
+            <p className="text-sm text-gray-700 mt-2">Applied for: {candidate.role}</p>
+
+            {/* Experience */}
+            {candidate.experience && (
+              <p className="text-sm text-gray-700 mt-2">Experience: {candidate.experience}</p>
+            )}
+
+            {/* Skills row: dark black text */}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(candidate.skills || []).map((s, i) => (
+                <span key={i} className="text-sm text-black px-2 py-1 border rounded-full bg-transparent">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right column: status on top, actions bottom */}
+        <div className="ml-4 flex-shrink-0 flex flex-col justify-between items-end">
+          {/* Status badge (top-right) */}
+          <div className="self-end">
+            {(() => {
+              const status = (candidate.status || "Applied").toLowerCase();
+              const map = {
+                applied: "bg-gray-100 text-gray-800",
+                interview: "bg-yellow-100 text-yellow-800",
+                shortlisted: "bg-green-100 text-green-800",
+                offered: "bg-blue-100 text-blue-800",
+              };
+              const cls = map[status] || "bg-gray-100 text-gray-800";
+              return (
+                <span className={`px-3 py-1 text-xs font-medium rounded-full ${cls}`}>{candidate.status || "Applied"}</span>
+              );
+            })()}
+          </div>
+
+          {/* Buttons (bottom-right) */}
+          <div className="mt-4 flex gap-x-2">
+            <Button
+              type="button"
+              variant="primary2"
+              onClick={() => window.open(candidate.linkedinUrl || candidate.resumeUrl || '#', '_blank')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h6m0 0v6m0-6L10 16" />
+              </svg>
+              View Profile
+            </Button>
+
+            <Button type="button" variant="primary2" onClick={handleSchedule}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Schedule
+            </Button>
+          </div>
         </div>
       </div>
  
