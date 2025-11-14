@@ -1,5 +1,5 @@
 // Sample posted jobs data
-const jobs = [
+const candidates = [
   {
     id: 1,
     title: "Frontend Developer",
